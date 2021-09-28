@@ -6,8 +6,12 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 20:57:08 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/09/28 20:57:12 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/09/28 21:11:59 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "pipex.h"
 
+int main(int argc, char **argv, char **envp)
+{
+}

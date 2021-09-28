@@ -10,4 +10,37 @@
 #                                                                              #
 # **************************************************************************** #
 
+SRCS =	pipex.c \
 
+OBJS = ${SRCS:.c=.o}
+
+NAME = pipex
+
+HEADER = pipex.h
+
+CC = clang 
+
+CFLAGS = -Wall -Werror -Wextra
+RM = rm -f
+
+.c.o:
+	${CC} -c ${CFLAGS} -o $@ $< 
+
+$(NAME):    ${OBJS}
+	make -C libft
+	${CC} ${CFLAGS} ${OBJS} -L./libft -lft -o ${NAME}
+	echo "Compilation done"
+
+all:	${NAME}
+
+clean: 
+	make clean -C libft
+	${RM} ${OBJS}
+
+fclean: clean
+	make fclean -C libft	
+	s${RM} ${NAME}
+
+re:	 fclean all
+
+.PHONY: all clean fclean re
