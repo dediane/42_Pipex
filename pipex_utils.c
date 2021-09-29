@@ -1,19 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/28 20:57:18 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/09/28 20:57:20 by ddecourt         ###   ########.fr       */
+/*   Created: 2021/09/30 00:29:58 by ddecourt          #+#    #+#             */
+/*   Updated: 2021/09/30 00:30:01 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-#define PIPEX_H
+#include "pipex.h"
 
-#include <unistd.h>
-#include <stdlib.h>
+char	*ft_strstr(char *haystack, char *needle)
+{
+	int i;
+	int j;
 
-#endif
+	if (!(*needle))
+		return ((char *)haystack);
+	i = -1;
+	while (haystack[++i])
+	{
+		j = 0;
+		while ((haystack[i + j] == needle[j]) && needle[j])
+			j++;
+		if (!(needle[j]))
+			return ((char *)(haystack + i));
+	}
+	return (0);
+}
