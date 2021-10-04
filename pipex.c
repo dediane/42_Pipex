@@ -50,19 +50,31 @@ char	**get_path(char **envp)
 	return (ft_split(path + 5, ':'));
 }
 
+char **parse_argv(char **argv, int argc)
+{
+	char *buffer;
+
+	buffer = NULL;
+	buffer = ft_strjoin(buffer, argv[argc - 1]);
+	printf("Voici ma string -> %s\n", buffer);
+	return(ft_split(buffer, ' '));	
+}
+
 int main(int argc, char **argv, char **envp)
 {
 	int fd[2];
 	int pid1;
 	char **path;
+	char **cmd;
 
-	printf("ARGC = %d\n", argc);
-	printf("argv[0] = %s\n", argv[0]);
  	path = get_path(envp);
+	cmd = parse_argv(argv, argc);
 	if (path == NULL)
 		return (1);
-	printf("Mon path n'est pas null\n");
 	printf("%s\n", path[0]);
+	printf("%s\n", argv[0]);
+	//printf("%s\n", cmd[0]);
+	printf("%d\n", argc);
  	if (pipe(fd) == -1)
  		return (1);
  	pid1 = fork();

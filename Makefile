@@ -22,7 +22,7 @@ HEADER = pipex.h
 
 CC = clang 
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -g3 -Wall -Werror -Wextra
 RM = rm -f
 
 .c.o:
@@ -38,7 +38,7 @@ clean:
 	${RM} ${OBJS}
 
 fclean: clean
-	s${RM} ${NAME}
+	${RM} ${NAME}
 
 re:	 fclean all
 
