@@ -10,8 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stdio.h"
+#include <stdio.h>
 #include "pipex.h"
+
 
 /* 
 1 - Récuperer le PATH d'envp
@@ -21,7 +22,7 @@
  4 - Attendre la fin du process pour executer le 
  Parent process
  5 - Rediriger */
-int main(int argc, char **argv, char **envp)
+/*int main(int argc, char **argv, char **envp)
 {
 	int i = -1;
 
@@ -31,29 +32,46 @@ int main(int argc, char **argv, char **envp)
 	{
 		printf("%s\n", envp[i]);
 	}
+}*/
+
+char	**get_path(char **envp)
+{
+	int i;
+	int j;
+	char *path;
+
+	i = -1;
+	j = -1;
+	while (envp[++i])
+	{
+		if (ft_strnstr(envp[i], "PATH", 4) != 0)
+			path = ft_strnstr(envp[i], "PATH", 4);
+	}
+	return (ft_split(path + 5, ':'));
 }
-// char	*get_path(char **envp, char *cmd)
-// {
 
-// }
+int main(int argc, char **argv, char **envp)
+{
+	int fd[2];
+	int pid1;
+	char **path;
 
-// int main(int argc, char **argv, char **envp)
-// {
-// 	int fd[2];
-// 	int pid1;
-// 	char *path;
-
-// 	path = get_path(envp, argv[1]);
-// 	if (pipe(fd) == -1)
-// 		return (1);
-// 	pid1 = fork();
-// 	if (pid1 == 0)
-// 	{
-// 		dup2(fd[1], STDOUT_FILENO);
-// 		close(fd[0]);
-// 		close(fd[1]);
-// 		execute_cmd();
-// 	}
-// 	waitpid(pid1, NULL, 0);
-// 	return (0);
-// }
+	printf("ARGC = %d\n", argc);
+	printf("argv[0] = %s\n", argv[0]);
+ 	path = get_path(envp);
+	if (path == NULL)
+		return (1);
+	printf("Mon path n'est pas null\n");
+	printf("%s\n", path[0]);
+ 	if (pipe(fd) == -1)
+ 		return (1);
+ 	pid1 = fork();
+ 	if (pid1 == 0)
+ 	{
+ 		dup2(fd[1], STDOUT_FILENO);
+ 		close(fd[0]);
+ 		close(fd[1]);
+ 	}
+ 	waitpid(pid1, NULL, 0);
+ 	return (0);
+}

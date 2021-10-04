@@ -11,6 +11,8 @@
 # **************************************************************************** #
 
 SRCS =	pipex.c \
+		pipex_utils.c \
+		ft_split.c \
 
 OBJS = ${SRCS:.c=.o}
 
@@ -27,18 +29,15 @@ RM = rm -f
 	${CC} -c ${CFLAGS} -o $@ $< 
 
 $(NAME):    ${OBJS}
-	make -C libft
-	${CC} ${CFLAGS} ${OBJS} -L./libft -lft -o ${NAME}
+	${CC} ${CFLAGS} ${OBJS} -o ${NAME}
 	echo "Compilation done"
 
 all:	${NAME}
 
 clean: 
-	make clean -C libft
 	${RM} ${OBJS}
 
 fclean: clean
-	make fclean -C libft	
 	s${RM} ${NAME}
 
 re:	 fclean all

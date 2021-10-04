@@ -12,21 +12,23 @@
 
 #include "pipex.h"
 
-char	*ft_strstr(char *haystack, char *needle)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	int i;
-	int j;
+	size_t	i;
+	size_t	j;
 
 	if (!(*needle))
 		return ((char *)haystack);
-	i = -1;
-	while (haystack[++i])
+	i = 0;
+	while (haystack[i] && i < len)
 	{
 		j = 0;
-		while ((haystack[i + j] == needle[j]) && needle[j])
+		while ((haystack[i + j] == needle[j]) && needle[j] && (i + j) < len)
 			j++;
 		if (!(needle[j]))
 			return ((char *)(haystack + i));
+		else
+			i++;
 	}
 	return (0);
 }
