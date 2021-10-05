@@ -11,8 +11,9 @@
 # **************************************************************************** #
 
 SRCS =	pipex.c \
-		pipex_utils.c \
-		ft_split.c \
+		srcs/pipex_utils.c \
+		srcs/ft_split.c \
+		srcs/parsing.c \
 
 OBJS = ${SRCS:.c=.o}
 
