@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/05 21:33:44 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/05 21:33:46 by ddecourt         ###   ########.fr       */
+/*   Created: 2021/09/28 20:57:08 by ddecourt          #+#    #+#             */
+/*   Updated: 2021/09/30 00:19:08 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ char *find_path(char *cmd, char **path_array)
 	{
 		path = ft_strjoin(path_array[i], "/");
 		path = ft_strjoin(path, cmd);
-		// free(path_array[i]);
 		if (access(path, F_OK) == 0)
 			return(path);
 	}
@@ -36,12 +35,21 @@ char **get_one_cmd(char **cmds)
 	int		size;
 	int		i;
 
-	i = -1;
 	while (cmd[i])
 	{
 		
 	}
 }
+/*int	execute_child_process(char **path_array, char **cmd, int pipe_fd, int fd)
+{
+	char *path;
+
+	dup2(pipe_fd, STDOUT_FILENO);
+	path = find_path(cmd[0], path_array);
+	printf("%s\n", path);
+	printf("fd -> %d\n", fd);
+	return (0);
+}*/
 
 int main(int argc, char **argv, char **envp)
 {
@@ -51,8 +59,6 @@ int main(int argc, char **argv, char **envp)
 	char **path_array;
 	char **cmd1;
 
-	if (argc != 5)
-		exit(2);
 	fd[0] = open(argv[1], O_RDONLY);
 	if (fd[0] == -1)
 		perror(argv[1]);

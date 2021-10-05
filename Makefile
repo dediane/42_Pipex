@@ -23,7 +23,7 @@ HEADER = pipex.h
 
 CC = clang 
 
-CFLAGS = -g3 -Wall -Werror -Wextra
+CFLAGS = -g -Wall -Werror -Wextra
 RM = rm -f
 
 .c.o:
@@ -31,7 +31,6 @@ RM = rm -f
 
 $(NAME):    ${OBJS}
 	${CC} ${CFLAGS} ${OBJS} -o ${NAME}
-	echo "Compilation done"
 
 all:	${NAME}
 
