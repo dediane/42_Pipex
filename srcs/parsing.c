@@ -61,3 +61,14 @@ int	get_size(char **tab)
 		size += ft_strlen(tab[i]);
 	return (size);
 }
+
+char	**get_cmd_array(char **argv, int argc)
+{
+	char	*s;
+	char	**array;
+
+	s = convert_argv(argv, argc);
+	array = ft_split(s, ' ');
+	free(s);
+	return (array);
+}

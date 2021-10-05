@@ -16,5 +16,6 @@
 int		get_size(char **tab);
 char	*convert_argv(char **argv, int argc);
 char	**get_path(char **envp);
+char	**get_cmd_array(char **argv, int argc);
 
 #endif
