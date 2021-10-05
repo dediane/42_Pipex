@@ -22,5 +22,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char	**ft_split(char const *s, char c);
 char	*ft_strjoin(char const *s1, char const *s2);
 int	ft_strlen(const char *str);
+void	ft_bzero(void *s, size_t n);
+char	*ft_strcat(char *dest, char *src);
 
 #endif
