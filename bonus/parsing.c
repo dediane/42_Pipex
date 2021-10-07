@@ -12,22 +12,6 @@
 
 #include "../pipex.h"
 
-char	**get_path(char **envp)
-{
-	int		i;
-	int		j;
-	char	*path;
-
-	i = -1;
-	j = -1;
-	while (envp[++i])
-	{
-		if (ft_strnstr(envp[i], "PATH", 4) != 0)
-			path = ft_strnstr(envp[i], "PATH", 4);
-	}
-	return (ft_split(path + 5, ':'));
-}
-
 char	*convert_argv(char **argv, int argc)
 {
 	int		size;
@@ -71,10 +55,4 @@ char	**get_cmd_array(char **argv, int argc)
 	array = ft_split(s, ' ');
 	free(s);
 	return (array);
-}
-
-void	ft_putstr_fd(char *s, int fd)
-{
-	if (s)
-		write(fd, s, ft_strlen(s));
 }

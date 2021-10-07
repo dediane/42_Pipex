@@ -10,13 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "pipex.h"
 
-char *find_path(char *cmd, char **path_array, char *file)
+char	*find_path(char *cmd, char **path_array, char *file)
 {
-	char *path;
-	int i;
+	char	*path;
+	int		i;
 
 	i = -1;
 	while (path_array[++i])
@@ -24,12 +23,10 @@ char *find_path(char *cmd, char **path_array, char *file)
 		path = ft_strjoin(path_array[i], "/");
 		path = ft_strjoin(path, cmd);
 		if (access(path, F_OK) == 0)
-			return(path);
+			return (path);
 	}
 	free(path_array);
-	//perror(file);
 	ft_putstr_fd(file, 2);
-	//strerror(errno);
 	ft_putstr_fd(": command not found\n", 2);
 	return (NULL);
 }
@@ -39,24 +36,22 @@ void	open_files(int *fd, int *fd2, char *s, char *s2)
 	*fd = open(s, O_RDONLY);
 	if (*fd == -1)
 	{
-		//perror(s);
-		strerror(errno);
+		perror(s);
 		exit(2);
 	}
 	*fd2 = open(s2, O_WRONLY | O_CREAT, 0644);
 	if (*fd2 == -1)
 	{
-		//perror(s2);
-		strerror(errno);
+		perror(s);
 		exit(2);
 	}
-	return;
+	return ;
 }
 
-int process_one(int *pipe, int *fd, char **envp, char **argv)
+int	process_one(int *pipe, int *fd, char **envp, char **argv)
 {
-	char **cmd;
-	char **path_array;
+	char	**cmd;
+	char	**path_array;
 
 	cmd = NULL;
 	dup2(*pipe, STDOUT_FILENO);
@@ -70,10 +65,10 @@ int process_one(int *pipe, int *fd, char **envp, char **argv)
 	return (0);
 }
 
-int process_two(int *pipe, int *fd, char **envp, char **argv)
+int	process_two(int *pipe, int *fd, char **envp, char **argv)
 {
-	char **cmd;
-	char **path_array;
+	char	**cmd;
+	char	**path_array;
 
 	cmd = NULL;
 	dup2(*fd, STDOUT_FILENO);
@@ -87,50 +82,29 @@ int process_two(int *pipe, int *fd, char **envp, char **argv)
 	return (0);
 }
 
-int main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
-	int fd[2];
-	int pipe_fd[2];
-	int pid;
-	//char **path_array;
-	char **cmd;
+	int		fd[2];
+	int		pipe_fd[2];
+	int		pid;
 
-	cmd = NULL;
-	if (argc != 5)
-	{
-		ft_putstr_fd("Usage: [infile] [cmd1] [cmd2] [outfile]\n", 2);
-		exit(EXIT_FAILURE);
-		//strerror(errno);
-	}
+	check_arg(argc);
 	open_files(&fd[0], &fd[1], argv[1], argv[4]);
- 	/*path_array = get_path(envp);
-	if (path_array == NULL)
-		return (1);*/
- 	if (pipe(pipe_fd) == -1)
- 		return (1);
- 	pid = fork();
- 	if (pid == 0)
+	if (pipe(pipe_fd) == -1)
+		return (1);
+	pid = fork();
+	if (pid == 0)
 	{
 		close(pipe_fd[0]);
 		close(fd[1]);
 		process_one(&pipe_fd[1], &fd[0], envp, argv);
-		/*dup2(pipe_fd[1], STDOUT_FILENO);
-		dup2(fd[0], STDIN_FILENO);
-		cmd = ft_split(argv[2], ' ');
-		execve(find_path(cmd[0], path_array, argv[1]), cmd, envp);
-		free(cmd);*/
 	}
-	else 
+	else
 	{
 		close(pipe_fd[1]);
 		close(fd[0]);
 		process_two(&pipe_fd[0], &fd[1], envp, argv);
-		/*dup2(pipe_fd[0], STDIN_FILENO);
-		dup2(fd[1], STDOUT_FILENO);
-		cmd = ft_split(argv[3], ' ');
-		execve(find_path(cmd[0], path_array, argv[4]), cmd, envp);
-		free(cmd);*/
 	}
- 	waitpid(pid, NULL, 0);
- 	return (0);
+	waitpid(pid, NULL, 0);
+	return (0);
 }

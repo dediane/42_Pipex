@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_utils.h                                      :+:      :+:    :+:   */
+/*   pipex_utils2.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/05 13:03:45 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/05 13:03:48 by ddecourt         ###   ########.fr       */
+/*   Created: 2021/10/07 13:33:18 by ddecourt          #+#    #+#             */
+/*   Updated: 2021/10/07 13:37:55 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_UTILS_H
-# define PIPEX_UTILS_H
+#ifndef PIPEX_UTILS2_H
+# define PIPEX
 
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
-char	*ft_strjoin(char const *s1, char const *s2);
-int		ft_strlen(const char *str);
-void	ft_putstr_fd(char *s, int fd);
-
+char	**get_path(char **envp);
+int		check_arg(int i);
 
 #endif

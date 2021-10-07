@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_utils.h                                      :+:      :+:    :+:   */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/05 13:03:45 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/05 13:03:48 by ddecourt         ###   ########.fr       */
+/*   Created: 2021/10/05 13:02:29 by ddecourt          #+#    #+#             */
+/*   Updated: 2021/10/05 13:02:31 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_UTILS_H
-# define PIPEX_UTILS_H
+#ifndef PARSING_H
+# define PARSING_H
 
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
-char	*ft_strjoin(char const *s1, char const *s2);
-int		ft_strlen(const char *str);
+int		get_size(char **tab);
+char	*convert_argv(char **argv, int argc);
+char	**get_path(char **envp);
+char	**get_cmd_array(char **argv, int argc);
 void	ft_putstr_fd(char *s, int fd);
-
+int		check_arg(int i);
 
 #endif
