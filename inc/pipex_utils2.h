@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #ifndef PIPEX_UTILS2_H
-# define PIPEX
+# define PIPEX_UTILS2_H
 
 char	**get_path(char **envp);
 int		check_arg(int i);

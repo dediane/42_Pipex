@@ -59,7 +59,7 @@ int	process_one(int *pipe, int *fd, char **envp, char **argv)
 	cmd = ft_split(argv[2], ' ');
 	path_array = get_path(envp);
 	if (path_array == NULL)
-		exit(0);
+		exit(127);
 	execve(find_path(cmd[0], path_array, argv[1]), cmd, envp);
 	free(cmd);
 	return (0);
