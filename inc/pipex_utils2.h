@@ -15,5 +15,6 @@
 
 char	**get_path(char **envp);
 int		check_arg(int i);
+int     close_all(int *fd, int *fd2, int *fd3, int *fd4);
 
 #endif

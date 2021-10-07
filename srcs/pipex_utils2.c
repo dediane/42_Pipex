@@ -37,3 +37,12 @@ int	check_arg(int i)
 	}
 	return (0);
 }
+
+int	close_all(int *fd, int *fd2, int *fd3, int *fd4)
+{
+	close(*fd);
+	close(*fd2);
+	close(*fd3);
+	close(*fd4);
+	return (0);
+}
