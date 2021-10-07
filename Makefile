@@ -6,7 +6,7 @@
 #    By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/28 20:56:57 by ddecourt          #+#    #+#              #
-#    Updated: 2021/09/28 20:56:59 by ddecourt         ###   ########.fr        #
+#    Updated: 2021/10/07 18:38:09 by ddecourt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ HEADER = pipex.h
 
 CC = clang
 
-CFLAGS = -g -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra
 RM = rm -f
 
 .c.o:

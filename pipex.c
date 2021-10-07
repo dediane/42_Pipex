@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 21:33:44 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/07 17:40:16 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/07 18:44:43 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,17 +87,20 @@ int	main(int argc, char **argv, char **envp)
 	int		fd[2];
 	int		pipe_fd[2];
 	int		pid;
+	int		status;
 
+	status = 0;
 	check_arg(argc);
 	open_files(&fd[0], &fd[1], argv[1], argv[4]);
-	if (pipe(pipe_fd) == -1)
-		return (1);
+	pipe(pipe_fd);
 	pid = fork();
 	if (pid == 0)
 	{
+		exit(5);
 		close(pipe_fd[0]);
 		close(fd[1]);
 		process_one(&pipe_fd[1], &fd[0], envp, argv);
+	//	exit(5);
 	}
 	else
 	{
@@ -105,6 +108,7 @@ int	main(int argc, char **argv, char **envp)
 		close(fd[0]);
 		process_two(&pipe_fd[0], &fd[1], envp, argv);
 	}
-	waitpid(pid, NULL, 0);
+	close_all(&fd[0], &fd[1], &pipe_fd[0], &pipe_fd[1]);
+	waitpid(pid, &status, 0);
 	return (0);
 }
