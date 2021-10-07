@@ -21,7 +21,7 @@ NAME = pipex
 
 HEADER = pipex.h
 
-CC = clang 
+CC = clang
 
 CFLAGS = -g -Wall -Werror -Wextra
 RM = rm -f
