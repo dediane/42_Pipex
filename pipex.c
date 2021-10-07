@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 21:33:44 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/07 17:33:01 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/07 17:40:16 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,6 @@ int	main(int argc, char **argv, char **envp)
 		close(fd[0]);
 		process_two(&pipe_fd[0], &fd[1], envp, argv);
 	}
-	waitpid(pid, NULL);
+	waitpid(pid, NULL, 0);
 	return (0);
 }
