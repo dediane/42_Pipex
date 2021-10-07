@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:33:18 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/07 13:37:55 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/07 22:21:59 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,5 @@
 
 char	**get_path(char **envp);
 int		check_arg(int i);
-int     close_all(int *fd, int *fd2, int *fd3, int *fd4);
 
 #endif

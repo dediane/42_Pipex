@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:31:40 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/07 13:31:42 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/07 22:21:52 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,5 @@ int	check_arg(int i)
 		ft_putstr_fd("Usage: [infile] [cmd1] [cmd2] [outfile]\n", 2);
 		exit(EXIT_FAILURE);
 	}
-	return (0);
-}
-
-int	close_all(int *fd, int *fd2, int *fd3, int *fd4)
-{
-	close(*fd);
-	close(*fd2);
-	close(*fd3);
-	close(*fd4);
 	return (0);
 }

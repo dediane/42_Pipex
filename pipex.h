@@ -6,11 +6,11 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 16:44:18 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/07 16:46:02 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/07 22:24:17 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	PIPEX_H
+#ifndef PIPEX_H
 # define PIPEX_H
 
 # include <unistd.h>
