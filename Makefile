@@ -6,7 +6,7 @@
 #    By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/28 20:56:57 by ddecourt          #+#    #+#              #
-#    Updated: 2021/09/28 20:56:59 by ddecourt         ###   ########.fr        #
+#    Updated: 2021/10/07 21:25:40 by ddecourt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,6 @@ clean:
 fclean: clean
 	${RM} ${NAME}
 
-re:	 fclean alls
+re:	 fclean all
 
 .PHONY: all clean fclean re

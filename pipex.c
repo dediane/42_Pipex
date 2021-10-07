@@ -6,13 +6,13 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 21:33:44 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/07 17:40:16 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/07 21:48:38 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	*find_path(char *cmd, char **path_array, char *file)
+char	*find_path(char *cmd, char **path_array)
 {
 	char	*path;
 	int		i;
@@ -26,8 +26,9 @@ char	*find_path(char *cmd, char **path_array, char *file)
 			return (path);
 	}
 	free(path_array);
-	ft_putstr_fd(file, 2);
+	ft_putstr_fd(&cmd[0], 2);
 	ft_putstr_fd(": command not found\n", 2);
+	exit(127);
 	return (NULL);
 }
 
@@ -37,13 +38,13 @@ void	open_files(int *fd, int *fd2, char *s, char *s2)
 	if (*fd == -1)
 	{
 		perror(s);
-		exit(2);
+		exit(0);
 	}
 	*fd2 = open(s2, O_WRONLY | O_CREAT, 0664);
 	if (*fd2 == -1)
 	{
 		perror(s);
-		exit(2);
+		exit(0);
 	}
 	return ;
 }
@@ -60,7 +61,7 @@ int	process_one(int *pipe, int *fd, char **envp, char **argv)
 	path_array = get_path(envp);
 	if (path_array == NULL)
 		exit(127);
-	execve(find_path(cmd[0], path_array, argv[1]), cmd, envp);
+	execve(find_path(cmd[0], path_array), cmd, envp);
 	free(cmd);
 	return (0);
 }
@@ -77,7 +78,7 @@ int	process_two(int *pipe, int *fd, char **envp, char **argv)
 	path_array = get_path(envp);
 	if (path_array == NULL)
 		exit(0);
-	execve(find_path(cmd[0], path_array, argv[4]), cmd, envp);
+	execve(find_path(cmd[0], path_array), cmd, envp);
 	free(cmd);
 	return (0);
 }
