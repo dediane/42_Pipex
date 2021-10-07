@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 21:59:43 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/07 22:01:52 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/07 22:20:32 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	process_one(int *pipe, int *fd, char **envp, char **argv)
 	cmd = ft_split(argv[2], ' ');
 	path_array = get_path(envp);
 	if (path_array == NULL)
-		exit(127);
+		exit(1);
 	execve(find_path(cmd[0], path_array), cmd, envp);
 	free(cmd);
 	return (0);
@@ -77,7 +77,7 @@ int	process_two(int *pipe, int *fd, char **envp, char **argv)
 	cmd = ft_split(argv[3], ' ');
 	path_array = get_path(envp);
 	if (path_array == NULL)
-		exit(0);
+		exit (1);
 	execve(find_path(cmd[0], path_array), cmd, envp);
 	free(cmd);
 	return (0);
@@ -101,12 +101,12 @@ int	main(int argc, char **argv, char **envp)
 		close(fd[1]);
 		process_one(&pipe_fd[1], &fd[0], envp, argv);
 	}
-	else
+	waitpid(pid, &status, 0);
+	if (pid != 0)
 	{
 		close(pipe_fd[1]);
 		close(fd[0]);
 		process_two(&pipe_fd[0], &fd[1], envp, argv);
 	}
-	waitpid(pid, &status, 0);
 	return (0);
 }
