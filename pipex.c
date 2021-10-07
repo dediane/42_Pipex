@@ -39,7 +39,7 @@ void	open_files(int *fd, int *fd2, char *s, char *s2)
 		perror(s);
 		exit(2);
 	}
-	*fd2 = open(s2, O_WRONLY | O_CREAT, 0644);
+	*fd2 = open(s2, O_WRONLY | O_CREAT, 0664);
 	if (*fd2 == -1)
 	{
 		perror(s);
