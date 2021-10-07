@@ -72,3 +72,9 @@ char	**get_cmd_array(char **argv, int argc)
 	free(s);
 	return (array);
 }
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	if (s)
+		write(fd, s, ft_strlen(s));
+}

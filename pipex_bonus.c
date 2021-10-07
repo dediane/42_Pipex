@@ -29,27 +29,6 @@ char *find_path(char *cmd, char **path_array)
 	return (NULL);
 }
 
-char **get_one_cmd(char **cmds)
-{
-	char	**cmd;
-	int		size;
-	int		i;
-
-	while (cmd[i])
-	{
-		
-	}
-}
-/*int	execute_child_process(char **path_array, char **cmd, int pipe_fd, int fd)
-{
-	char *path;
-
-	dup2(pipe_fd, STDOUT_FILENO);
-	path = find_path(cmd[0], path_array);
-	printf("%s\n", path);
-	printf("fd -> %d\n", fd);
-	return (0);
-}*/
 
 int main(int argc, char **argv, char **envp)
 {
