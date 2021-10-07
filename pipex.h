@@ -19,6 +19,7 @@
 # include <sys/wait.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include <errno.h>
 # include <string.h>
 # include "inc/parsing.h"
 # include "inc/pipex_utils.h"

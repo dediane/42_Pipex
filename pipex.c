@@ -27,7 +27,9 @@ char *find_path(char *cmd, char **path_array, char *file)
 			return(path);
 	}
 	free(path_array);
+	//perror(file);
 	ft_putstr_fd(file, 2);
+	//strerror(errno);
 	ft_putstr_fd(": command not found\n", 2);
 	return (NULL);
 }
@@ -37,13 +39,15 @@ void	open_files(int *fd, int *fd2, char *s, char *s2)
 	*fd = open(s, O_RDONLY);
 	if (*fd == -1)
 	{
-		perror(s);
+		//perror(s);
+		strerror(errno);
 		exit(2);
 	}
 	*fd2 = open(s2, O_WRONLY | O_CREAT, 0644);
 	if (*fd2 == -1)
 	{
-		perror(s2);
+		//perror(s2);
+		strerror(errno);
 		exit(2);
 	}
 	return;
@@ -95,7 +99,8 @@ int main(int argc, char **argv, char **envp)
 	if (argc != 5)
 	{
 		ft_putstr_fd("Usage: [infile] [cmd1] [cmd2] [outfile]\n", 2);
-		exit(0);
+		exit(EXIT_FAILURE);
+		//strerror(errno);
 	}
 	open_files(&fd[0], &fd[1], argv[1], argv[4]);
  	/*path_array = get_path(envp);
