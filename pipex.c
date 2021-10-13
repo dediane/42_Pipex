@@ -95,7 +95,7 @@ int	main(int argc, char **argv, char **envp)
 	waitpid(pid, &status, 0);
 	if (pid != 0)
 	{
-		fd[1] = open(argv[4], O_WRONLY | O_CREAT, 0664);
+		fd[1] = open(argv[4], O_RDWR | O_TRUNC | O_CREAT, 0664);
 		process_two(&pipe_fd[0], &fd[1], envp, argv);
 	}
 	return (0);
