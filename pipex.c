@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 21:59:43 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/08 18:26:19 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/14 12:00:55 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,14 @@ int	main(int argc, char **argv, char **envp)
 	pid = fork();
 	if (pid == 0)
 	{
+		close(pipe_fd[0]);
 		fd[0] = open(argv[1], O_RDONLY);
 		process_one(&pipe_fd[1], &fd[0], envp, argv);
 	}
 	waitpid(pid, &status, 0);
 	if (pid != 0)
 	{
+		close(pipe_fd[1]);
 		fd[1] = open(argv[4], O_RDWR | O_TRUNC | O_CREAT, 0664);
 		process_two(&pipe_fd[0], &fd[1], envp, argv);
 	}
