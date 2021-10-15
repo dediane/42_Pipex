@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:31:40 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/07 22:21:52 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/15 17:29:38 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,17 @@ int	check_arg(int i)
 		exit(EXIT_FAILURE);
 	}
 	return (0);
+}
+
+void	ft_clear_tab(char ***s)
+{
+	int	i;
+
+	i = 0;
+	while ((*s)[i])
+	{
+		free((*s)[i]);
+		i++;
+	}
+	free(*s);
 }
