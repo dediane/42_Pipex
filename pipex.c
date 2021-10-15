@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 21:59:43 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/14 12:00:55 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/15 15:29:03 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	process_two(int *pipe, int *fd, char **envp, char **argv)
 	char	**cmd;
 	char	**path_array;
 
-	if (fd[1] == -1)
+	if (*fd == -1)
 	{
 		perror(argv[4]);
 		exit(0);
@@ -74,6 +74,13 @@ int	process_two(int *pipe, int *fd, char **envp, char **argv)
 	execve(find_path(cmd[0], path_array), cmd, envp);
 	free(cmd);
 	return (0);
+}
+
+void	ft_close(int *fd1, int *fd2, int *fd3)
+{
+	close(*fd1);
+	close(*fd2);
+	close(*fd3);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -92,6 +99,7 @@ int	main(int argc, char **argv, char **envp)
 		close(pipe_fd[0]);
 		fd[0] = open(argv[1], O_RDONLY);
 		process_one(&pipe_fd[1], &fd[0], envp, argv);
+		ft_close(&pipe_fd[1], &fd[0], &fd[1]);
 	}
 	waitpid(pid, &status, 0);
 	if (pid != 0)
@@ -99,6 +107,7 @@ int	main(int argc, char **argv, char **envp)
 		close(pipe_fd[1]);
 		fd[1] = open(argv[4], O_RDWR | O_TRUNC | O_CREAT, 0664);
 		process_two(&pipe_fd[0], &fd[1], envp, argv);
+		ft_close(&pipe_fd[0], &fd[0], &fd[1]);
 	}
 	return (0);
 }
