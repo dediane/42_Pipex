@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 21:59:43 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/15 15:29:03 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/15 15:45:12 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	process_one(int *pipe, int *fd, char **envp, char **argv)
 {
 	char	**cmd;
 	char	**path_array;
+	int		pid;
 
 	if (*fd == -1)
 	{
@@ -49,8 +50,12 @@ int	process_one(int *pipe, int *fd, char **envp, char **argv)
 	path_array = get_path(envp);
 	if (path_array == NULL)
 		exit(1);
-	execve(find_path(cmd[0], path_array), cmd, envp);
-	free(cmd);
+	pid = fork();
+	if (pid == 0)
+		execve(find_path(cmd[0], path_array), cmd, envp);
+	waitpid(pid, NULL, 0);
+	if (pid != 0)
+		free(cmd);
 	return (0);
 }
 
@@ -58,6 +63,7 @@ int	process_two(int *pipe, int *fd, char **envp, char **argv)
 {
 	char	**cmd;
 	char	**path_array;
+	int		pid;
 
 	if (*fd == -1)
 	{
@@ -71,8 +77,12 @@ int	process_two(int *pipe, int *fd, char **envp, char **argv)
 	path_array = get_path(envp);
 	if (path_array == NULL)
 		exit (1);
-	execve(find_path(cmd[0], path_array), cmd, envp);
-	free(cmd);
+	pid = fork();
+	if (pid == 0)
+		execve(find_path(cmd[0], path_array), cmd, envp);
+	waitpid(pid, NULL, 0);
+	if (pid != 0)
+		free(cmd);
 	return (0);
 }
 
