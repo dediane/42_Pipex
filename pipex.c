@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 21:59:43 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/20 16:01:38 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/20 16:03:37 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,11 @@ int	process_two(int *pipe, int *fd, char **argv, char **envp)
 	return (0);
 }
 
-void	ft_close(int *fd1, int *fd2, int *fd3)
+void	ft_close(int **fd1, int **fd2, int **fd3)
 {
-	close(fd1);
-	close(fd2);
-	close(fd3);
+	close(*fd1);
+	close(*fd2);
+	close(*fd3);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -95,8 +95,7 @@ int	main(int argc, char **argv, char **envp)
 		fd[0] = open(argv[1], O_RDONLY);
 		process_one(&pipe_fd[1], &fd[0], argv, envp);
 	}
-	//if (fd[0] != -1 && fd[1] != -1)
-		ft_close(&pipe_fd[1], &fd[0], &fd[1]);
+	ft_close(&pipe_fd[1], &fd[0], &fd[1]);
 	if (pid > 0)
 	{
 		waitpid(pid, 0, 0);
@@ -104,7 +103,6 @@ int	main(int argc, char **argv, char **envp)
 		fd[1] = open(argv[4], O_RDWR | O_TRUNC | O_CREAT, 0664);
 		process_two(&pipe_fd[0], &fd[1], argv, envp);
 	}
-	//if (fd[0] != -1 && fd[1] != -1)
-		ft_close(&pipe_fd[0], &fd[0], &fd[1]);
+	ft_close(&pipe_fd[0], &fd[0], &fd[1]);
 	return (0);
 }
