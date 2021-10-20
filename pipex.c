@@ -6,7 +6,7 @@
 /*   By: ddecourt@student.42.fr <ddecourt>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 21:59:43 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/20 16:45:06 by ddecourt@st      ###   ########.fr       */
+/*   Updated: 2021/10/20 17:00:55 by ddecourt@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	process_one(int *pipe, int *fd, char **argv, char **envp)
 	if (path_array == NULL)
 		exit(1);
 	execve(find_path(cmd[0], path_array), cmd, envp);
+	free(cmd);
 	return (0);
 }
 
@@ -69,6 +70,7 @@ int	process_two(int *pipe, int *fd, char **argv, char **envp)
 	if (path_array == NULL)
 		exit (1);
 	execve(find_path(cmd[0], path_array), cmd, envp);
+	free(cmd);
 	return (0);
 }
 
