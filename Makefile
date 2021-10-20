@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ddecourt@student.42.fr <ddecourt>          +#+  +:+       +#+         #
+#    By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/07 22:02:16 by ddecourt          #+#    #+#              #
-#    Updated: 2021/10/20 16:35:58 by ddecourt@st      ###   ########.fr        #
+#    Updated: 2021/10/20 17:37:44 by ddecourt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ HEADER = pipex.h
 
 CC = clang
 
-CFLAGS = -Wall -Werror -Wextra -g3
+CFLAGS = -Wall -Werror -Wextra
 RM = rm -f
 
 .c.o:
