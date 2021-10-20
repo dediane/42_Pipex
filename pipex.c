@@ -6,7 +6,7 @@
 /*   By: ddecourt@student.42.fr <ddecourt>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 21:59:43 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/20 16:25:23 by ddecourt@st      ###   ########.fr       */
+/*   Updated: 2021/10/20 16:41:30 by ddecourt@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	process_one(int *pipe, int *fd, char **argv, char **envp)
 {
 	char	**path_array;
 	char	**cmd;
+	int		pid;
 
 	if (*fd == -1)
 	{
@@ -48,8 +49,11 @@ int	process_one(int *pipe, int *fd, char **argv, char **envp)
 	cmd = ft_split(argv[2], ' ');
 	if (path_array == NULL)
 		exit(1);
-	if (!(execve(find_path(cmd[0], path_array), cmd, envp)))
-		return (0);
+	pid = fork();
+	if (pid == 0)
+		execve(find_path(cmd[0], path_array), cmd, envp);
+	else 
+		ft_clear_tab(&cmd);
 	return (0);
 }
 
