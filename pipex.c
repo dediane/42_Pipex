@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 21:59:43 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/20 13:35:15 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/20 13:59:50 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,45 +32,44 @@ char	*find_path(char *cmd, char **path_array)
 	return (NULL);
 }
 
-int	process_one(int *pipe, int *fd, t_a *a)
+int	process_one(int *pipe, int *fd, char **argv, char **envp)
 {
 	char	**path_array;
-	//int		pid;
+	char	**cmd;
 
 	if (*fd == -1)
 	{
-		perror(a->argv[1]);
+		perror(argv[1]);
 		exit(0);
 	}
 	dup2(*pipe, STDOUT_FILENO);
 	dup2(*fd, STDIN_FILENO);
-	path_array = get_path(a->envp);
+	path_array = get_path(envp);
+	cmd = ft_split(argv[2], ' ');
 	if (path_array == NULL)
 		exit(1);
-	//pid = fork();
-	//if (pid == 0)
-		if (!(execve(find_path(a->cmd1[0], path_array), a->cmd1, a->envp)))
-			return (0);
-	//waitpid(pid, 0, 0);
-	//if (pid != 0)
+	if (!(execve(find_path(cmd[0], path_array), cmd, envp)))
+		return (0);
 	return (0);
 }
 
-int	process_two(int *pipe, int *fd, t_a *a)
+int	process_two(int *pipe, int *fd, char **argv, char **envp)
 {
 	char	**path_array;
+	char	**cmd;
 
 	if (*fd == -1)
 	{
-		perror(a->argv[4]);
+		perror(argv[4]);
 		exit(0);
 	}
 	dup2(*fd, STDOUT_FILENO);
 	dup2(*pipe, STDIN_FILENO);
-	path_array = get_path(a->envp);
+	path_array = get_path(envp);
+	cmd = ft_split(argv[3], ' ');
 	if (path_array == NULL)
 		exit (1);
-	execve(find_path(a->cmd2[0], path_array), a->cmd2, a->envp);
+	execve(find_path(cmd[0], path_array), cmd, envp);
 	return (0);
 }
 
@@ -86,12 +85,7 @@ int	main(int argc, char **argv, char **envp)
 	int		fd[2];
 	int		pipe_fd[2];
 	int		pid;
-	t_a		a;
 
-	a.cmd1 = ft_split(argv[3], ' ');
-	a.cmd2 = ft_split(argv[2], ' ');
-	a.envp = envp;
-	a.argv = argv;
 	check_arg(argc);
 	pipe(pipe_fd);
 	pid = fork();
@@ -99,7 +93,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		close(pipe_fd[0]);
 		fd[0] = open(argv[1], O_RDONLY);
-		process_one(&pipe_fd[1], &fd[0], &a);
+		process_one(&pipe_fd[1], &fd[0], argv, envp);
 		ft_close(&pipe_fd[1], &fd[0], &fd[1]);
 	}
 	if (pid > 0)
@@ -107,11 +101,8 @@ int	main(int argc, char **argv, char **envp)
 		waitpid(pid, 0, 0);
 		close(pipe_fd[1]);
 		fd[1] = open(argv[4], O_RDWR | O_TRUNC | O_CREAT, 0664);
-		process_two(&pipe_fd[0], &fd[1], &a);
+		process_two(&pipe_fd[0], &fd[1], argv, envp);
 		ft_close(&pipe_fd[0], &fd[0], &fd[1]);
 	}
-	ft_clear_tab(&a.cmd1);
-	ft_clear_tab(&a.cmd2);
-	while(1);
 	return (0);
 }
