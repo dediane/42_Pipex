@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 21:59:43 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/20 14:10:40 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/20 15:46:16 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	process_one(int *pipe, int *fd, char **argv, char **envp)
 {
 	char	**path_array;
 	char	**cmd;
+	int		pid;
 
 	if (*fd == -1)
 	{
