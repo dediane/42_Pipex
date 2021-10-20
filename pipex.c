@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 21:59:43 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/20 16:03:37 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/20 16:04:29 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	process_two(int *pipe, int *fd, char **argv, char **envp)
 	return (0);
 }
 
-void	ft_close(int **fd1, int **fd2, int **fd3)
+void	ft_close(int *fd1, int *fd2, int *fd3)
 {
 	close(*fd1);
 	close(*fd2);
